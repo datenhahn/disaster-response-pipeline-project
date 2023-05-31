@@ -24,7 +24,7 @@ python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 curl -L https://github.com/ecodia/disaster-response-pipeline-project/releases/download/model/classifier.pkl -o models/classifier.pkl
-python app/run.py
+PYTHONPATH=$PWD python app/run.py
 ```
 
 Go to http://0.0.0.0:3001/ to access the webapp.
