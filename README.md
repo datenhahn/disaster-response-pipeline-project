@@ -33,6 +33,15 @@ If you want to train the model yourself, the following steps are required, which
 * Prepare the message database (ETL Pipeline).
 * Train the model (ML Pipeline).
 
+## Screenshots
+
+The start page of the webapp.
+
+![Screenshot of the webapp](.assets/screenshot-index-page.png)
+
+The result page of a query.
+
+![Screenshot of a query](.assets/screenshot-query.png)
 
 ## Technical Requirements
 
@@ -64,8 +73,6 @@ The dataset contains 26,248 messages in total from different sources.
 The following categories are available:
 
 Floods, Hospitals, Aid Related, Child Alone, Related, Water, Food, Weather Related, Fire, Shops, Direct Report, Military, Aid Centers, Other Aid, Cold, Shelter, Storm, Other Weather, Offer, Money, Missing People, Tools, Search And Rescue, Earthquake, Death, Buildings, Other Infrastructure, Infrastructure Related, Refugees, Request, Medical Products, Security, Clothing, Medical Help, Transport, Electricity
-
-
 
 ## Training the Model
 
