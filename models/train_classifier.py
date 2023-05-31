@@ -24,6 +24,8 @@ from sklearn.pipeline import Pipeline
 from sqlalchemy import create_engine
 import nltk
 nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
 
 
 def load_training_data(database_filepath: str) -> (DataFrame, DataFrame, list[str]):
