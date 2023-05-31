@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 app = Flask(__name__)
 
-db_file = f'sqlite://{BASE_DIR}/data/DisasterResponse.db'
+db_file = f'sqlite:////{BASE_DIR}/data/DisasterResponse.db'
 # load data
 print(f"Loading database: {db_file}")
 engine = create_engine(db_file)

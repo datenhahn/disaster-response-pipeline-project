@@ -12,6 +12,8 @@ The project consists of three parts:
 
 **Quickstart (Running the Web-App)**
 
+The webapp requires at least 6GB of RAM to run.
+
 To run the project with the pretrained model and prepared database execute:
 
 ```
@@ -60,6 +62,10 @@ Libraries:
 * plotly==5.14.1
 * flask==2.3.2
 * pytest==7.3.1
+
+### Hardware Requirements
+
+The webapp requires at least 6GB of RAM to run.
 
 ## About the Dataset
 
