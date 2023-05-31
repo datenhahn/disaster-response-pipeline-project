@@ -17,8 +17,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 app = Flask(__name__)
 
+db_file = f'sqlite://{BASE_DIR}/data/DisasterResponse.db'
 # load data
-engine = create_engine(f'sqlite://{BASE_DIR}/data/DisasterResponse.db')
+print(f"Loading database: {db_file}")
+engine = create_engine(db_file)
 df = pd.read_sql_table('messages', engine)
 
 # load model
