@@ -22,6 +22,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.pipeline import Pipeline
 from sqlalchemy import create_engine
+import nltk
+nltk.download('punkt')
 
 
 def load_training_data(database_filepath: str) -> (DataFrame, DataFrame, list[str]):
