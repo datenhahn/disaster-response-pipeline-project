@@ -1,7 +1,8 @@
 """This script loads disaster messages and the manually classified categories from CSV files and merges them
 into one dataframe. The data is then cleaned and saved to a SQLite database.
 
-process_data.py [DISASTER_MESSAGE_CSV] [MESSAGE_CATEGORIES_CSV] [SQLITE_DB_FILE]
+Usage:
+python process_data.py <disaster_message_csv> <message_categories_csv> <sqlite_db_file>
 
 Usage:
    python process_data.py disaster_messages.csv disaster_categories.csv DisasterResponse.db

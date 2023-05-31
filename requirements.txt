@@ -3,4 +3,6 @@ sqlalchemy==2.0.15
 jupyter==1.0.0
 nltk==3.8.1
 scikit-learn==1.2.2
-
+plotly==5.14.1
+flask==2.3.2
+pytest==7.3.1
