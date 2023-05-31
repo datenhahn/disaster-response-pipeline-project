@@ -1,4 +1,5 @@
 import json
+import os
 
 import joblib
 import pandas as pd
@@ -12,10 +13,12 @@ from sqlalchemy import create_engine
 # this import is required for deserialization of the model
 from models.train_classifier import tokenize
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 app = Flask(__name__)
 
 # load data
-engine = create_engine('sqlite:///../data/DisasterResponse.db')
+engine = create_engine(f'sqlite://{BASE_DIR}/data/DisasterResponse.db')
 df = pd.read_sql_table('messages', engine)
 
 # load model
@@ -23,7 +26,7 @@ df = pd.read_sql_table('messages', engine)
 # Note: the tokenize function is required for deserialization of the model, we execute a dummy
 # statement to make sure the import is not removed by code tools.
 tokenize("test")
-model = joblib.load("../models/classifier.pkl")
+model = joblib.load(f"{BASE_DIR}/models/classifier.pkl")
 
 
 @app.route('/')
