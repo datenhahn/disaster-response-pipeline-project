@@ -30,6 +30,18 @@ df = pd.read_sql_table('messages', engine)
 tokenize("test")
 model = joblib.load(f"{BASE_DIR}/models/classifier.pkl")
 
+def extract_categories_stats(df: pd.DataFrame) -> (list, list):
+    """Extracts the category stats from the given dataframe and returns a new dataframe with the stats.
+
+    :param df: The dataframe to extract the category stats from.
+    :return: A new dataframe with the category stats.
+    """
+
+    # extract category stats
+    category_stats = df.drop(columns=["id", "message", "original", "genre"]).sum().sort_values(ascending=False)
+
+    return list(category_stats.index), list(category_stats.values)
+
 
 @app.route('/')
 @app.route('/index')
@@ -41,6 +53,8 @@ def index():
     # extract data needed for visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+
+    category_stats_names, category_stats_values = extract_categories_stats(df)
 
     # create visuals
     graphs = [
@@ -59,6 +73,24 @@ def index():
                 },
                 'xaxis': {
                     'title': "Genre"
+                }
+            }
+        },
+        {
+            'data': [
+                Bar(
+                    x=category_stats_names[:10],
+                    y=category_stats_values[:10]
+                )
+            ],
+
+            'layout': {
+                'title': 'Category Stats (Top 10)',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Category"
                 }
             }
         }

@@ -57,7 +57,7 @@ def save_data(df, database_filename):
     :return: The dataframe that was saved.
     """
     engine = create_engine(f"sqlite:///{database_filename}")
-    df.to_sql('messages', engine, index=False)
+    df.to_sql('messages', engine, index=False, if_exists='replace')
     return df
 
 

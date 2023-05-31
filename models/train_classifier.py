@@ -18,7 +18,7 @@ from pandas import DataFrame
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.metrics import classification_report
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.pipeline import Pipeline
 from sqlalchemy import create_engine
@@ -129,7 +129,7 @@ def save_report_to_file(report: str, filepath: str):
         file.write(report)
 
 
-def evaluate_model(model: Pipeline, X_test: DataFrame, Y_test: DataFrame, category_names: list[str]) -> str:
+def evaluate_model(model, X_test: DataFrame, Y_test: DataFrame, category_names: list[str]) -> str:
     """Evaluates the given model on the given test data and prints and saves the classification report.
 
     :param model: The model to evaluate.
@@ -179,13 +179,22 @@ def main():
         with parallel_backend('multiprocessing'):
 
             print("Building model...")
-            model = build_model_pipeline(n_jobs=number_of_parallel_jobs)
+            model_pipeline = build_model_pipeline(n_jobs=number_of_parallel_jobs)
 
             print("Training model...")
-            model.fit(X_train, Y_train)
+            # Define the parameter grid
+            parameters = {
+                'vect__max_df': (0.8, 0.9, 1.0),
+                'clf__estimator__n_estimators': [50, 100, 200],
+            }
+            # Initialize GridSearchCV
+            grid_search = GridSearchCV(model_pipeline, param_grid=parameters, n_jobs=USE_ALL_CPUS, verbose=2)
+
+            # Fit and tune model
+            optimized_model = grid_search.fit(X_train, Y_train)
 
         print('Evaluating model ...')
-        classification_report = evaluate_model(model, X_test, Y_test, classification_category_names)
+        classification_report = evaluate_model(optimized_model, X_test, Y_test, classification_category_names)
         print(classification_report)
 
         classification_report_file = "classification_report.txt"
@@ -193,7 +202,7 @@ def main():
         save_report_to_file(classification_report, classification_report_file)
 
         print(f"Saving model ... {model_filepath}")
-        save_model_to_file(model, model_filepath)
+        save_model_to_file(optimized_model, model_filepath)
 
         print("TRAINING COMPLETED!")
         print(f"Model saved to file '{model_filepath}'")
