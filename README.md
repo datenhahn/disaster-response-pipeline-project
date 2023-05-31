@@ -4,6 +4,9 @@
 
 The goal of this project is to build a Natural Language Processing (NLP) model to categorize messages sent during disasters. The model is trained on a dataset provided by Appen (formally Figure 8) containing real messages that were sent during disaster events. The model is then used to classify new messages.
 
+Demo (not permanently available):
+http://disaster-response-project.ecodia.de/
+
 The project consists of three parts:
 
 * ETL Pipeline: Loads the messages and categories datasets, merges the two datasets, cleans the data, and stores it in a SQLite database.
