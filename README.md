@@ -18,6 +18,7 @@ To run the project with the pretrained model and prepared database execute:
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+curl -L https://github.com/ecodia/disaster-response-pipeline-project/releases/download/model/classifier.pkl -o models/classifier.pkl
 python app/run.py
 ```
 
